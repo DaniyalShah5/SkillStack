@@ -16,7 +16,7 @@ const ChatInterface = () => {
 
   
   useEffect(() => {
-    const newSocket = io('http://localhost:4000');
+    const newSocket = io(`${import.meta.env.VITE_API_BASE_URL}`);
     setSocket(newSocket);
     return () => newSocket.disconnect();
   }, []);
@@ -55,14 +55,14 @@ const ChatInterface = () => {
     try {
       setLoading(true);
       
-      const response = await axios.get(`http://localhost:4000/api/chat/user/${user.id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/chat/user/${user.id}`);
       
       if (response.data && response.data.length > 0) {
         
         setCurrentChat(response.data[0]);
       } else {
         
-        const newChatResponse = await axios.post('http://localhost:4000/api/chat/initialize', {
+        const newChatResponse = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/chat/initialize`, {
           userId: user.id
         });
         setCurrentChat(newChatResponse.data);
@@ -76,7 +76,7 @@ const ChatInterface = () => {
 
   const fetchChatHistory = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/chat/history/${currentChat._id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/chat/history/${currentChat._id}`);
       setMessages(response.data);
       scrollToBottom();
     } catch (error) {

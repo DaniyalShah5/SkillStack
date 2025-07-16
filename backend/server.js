@@ -22,11 +22,13 @@ dotenv.config();
 
 
 const app = express();
-const httpServer = createServer(app);
+const httpServer = http.createServer(app);
 const PORT = process.env.PORT || 4000;
+const FRONTEND_URL = "https://lambent-dasik-e1878e.netlify.app";
+
 const io = new SocketServer(httpServer, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: FRONTEND_URL,
     methods: ["GET", "POST"]
   }
 });
@@ -38,7 +40,7 @@ handleSocketEvents(io);
 app.use('/api/config', stripeWebhook)
 
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 app.use(bodyParser.json());
 
 
@@ -64,5 +66,5 @@ app.use((err, req, res, next) => {
 
 
 httpServer.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

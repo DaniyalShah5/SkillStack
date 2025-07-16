@@ -14,7 +14,7 @@ export const CoursePage = () => {
   useEffect(() => {
     
     axios
-    .get("http://localhost:4000/api/categories/get-courses-info")
+    .get(`${import.meta.env.VITE_API_BASE_URL}/api/categories/get-courses-info`)
 
     .then((response) => {
       setTopics(response?.data?.find((item) => item?.categoryName === category)

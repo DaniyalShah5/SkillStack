@@ -22,7 +22,7 @@ export function UserProvider({ children }) {
           
           
           try {
-            const { data } = await axios.get(`http://localhost:4000/api/subscription/status/${userData.id}`);
+            const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${userData.id}`);
             
             const updatedUserData = {
               ...userData,
@@ -56,7 +56,7 @@ export function UserProvider({ children }) {
     if (user?.id) {
       interval = setInterval(async () => {
         try {
-          const { data } = await axios.get(`http://localhost:4000/api/subscription/status/${user.id}`);
+          const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${user.id}`);
           if (data.chatPassActive !== user.chatPassActive || 
               data.subscriptionEnd !== user.subscriptionEnd ||
               data.subscriptionPlan !== user.subscriptionPlan) {
@@ -94,7 +94,7 @@ export function UserProvider({ children }) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
         
         
-        const { data } = await axios.get(`http://localhost:4000/api/subscription/status/${userData.id}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${userData.id}`);
         
         
         const updatedUserData = {
@@ -132,7 +132,7 @@ export function UserProvider({ children }) {
 
       
       if ('chatPassActive' in newUserData || 'subscriptionEnd' in newUserData || 'subscriptionPlan' in newUserData) {
-        const { data } = await axios.get(`http://localhost:4000/api/subscription/status/${updatedUser.id}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${updatedUser.id}`);
         
         
         const verifiedUser = {
@@ -155,7 +155,7 @@ export function UserProvider({ children }) {
     if (!user?.id) return null;
     
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/subscription/status/${user.id}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${user.id}`);
       const updatedUser = {
         ...user,
         chatPassActive: data.chatPassActive,

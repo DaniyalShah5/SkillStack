@@ -10,7 +10,7 @@ class SocketService {
   constructor(httpServer) {
     this.io = new Server(httpServer, {
       cors: {
-        origin: "http://localhost:5173",
+        origin: "https://lambent-dasik-e1878e.netlify.app",
         credentials: true
       },
       pingTimeout: 60000

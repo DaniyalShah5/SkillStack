@@ -18,7 +18,7 @@ const MentorDashboard = () => {
 
   
   useEffect(() => {
-    const newSocket = io('http://localhost:4000');
+    const newSocket = io(`${import.meta.env.VITE_API_BASE_URL}`);
     setSocket(newSocket);
     return () => newSocket.disconnect();
   }, []);
@@ -84,7 +84,7 @@ const MentorDashboard = () => {
   const fetchActiveChats = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:4000/api/chat/mentor/${user.id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/chat/mentor/${user.id}`);
       
       setActiveChats(response.data);
       setLoading(false);
@@ -99,7 +99,7 @@ const MentorDashboard = () => {
     if (!currentChat?._id) return;
 
     try {
-      const response = await axios.get(`http://localhost:4000/api/chat/history/${currentChat._id}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/chat/history/${currentChat._id}`);
       
       setMessages(response.data);
     } catch (error) {

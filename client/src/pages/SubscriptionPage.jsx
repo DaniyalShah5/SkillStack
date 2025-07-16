@@ -38,7 +38,7 @@ const CheckoutForm = ({ plan, onSuccess, onError }) => {
       }
 
       console.log('Creating payment intent...');
-      const { data: intentData } = await axios.post('http://localhost:4000/api/stripe/create-payment-intent', {
+      const { data: intentData } = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/stripe/create-payment-intent`, {
         plan,
         userId: user.id
       });
@@ -143,7 +143,7 @@ const SubscriptionPage = () => {
   const handleSubscriptionSuccess = async () => {
     setSuccess(true);
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/subscription/status/${user.id}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${user.id}`);
       const updatedUserData ={
         ...user,
         chatPassActive: data.chatPassActive,
@@ -171,7 +171,7 @@ const SubscriptionPage = () => {
       const initializePayment = async () => {
         try {
           console.log('Initializing payment for plan:', selectedPlan);
-          const { data } = await axios.post('http://localhost:4000/api/stripe/create-payment-intent', {
+          const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/stripe/create-payment-intent`, {
             plan: selectedPlan,
             userId:user.id
           });

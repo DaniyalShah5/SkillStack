@@ -13,7 +13,7 @@ function ProgressPage() {
   
     const fetchProgress = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/progress/${user.id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/progress/${user.id}`);
         setProgressData(response.data);
       } catch (error) {
         console.error('Error fetching progress:', error);

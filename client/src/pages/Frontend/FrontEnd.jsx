@@ -96,7 +96,7 @@ function FrontEnd (){
 
     useEffect(() => {
         
-        axios.get("http://localhost:4000/api/categories/get-courses-info").then((response)=>{
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/categories/get-courses-info`).then((response)=>{
 
 
             setTopicsDropdown(response.data);

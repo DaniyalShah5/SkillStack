@@ -57,7 +57,7 @@ function Nav() {
   const fetchTopics = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/categories/get-courses-info"
+        `${import.meta.env.VITE_API_BASE_URL}/api/categories/get-courses-info`
       );
       setTopicsDropdown(response.data);
     } catch (error) {
@@ -80,7 +80,7 @@ function Nav() {
       if (user?.id) {
         try {
           const { data } = await axios.get(
-            `http://localhost:4000/api/subscription/status/${user.id}`
+            `${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${user.id}`
           );
           setSubscriptionStatus(data);
 

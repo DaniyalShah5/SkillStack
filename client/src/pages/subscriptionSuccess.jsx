@@ -28,7 +28,7 @@ const SubscriptionSuccess = () => {
         
         await new Promise(resolve => setTimeout(resolve, 2000));
         
-        const { data } = await axios.get(`http://localhost:4000/api/subscription/status/${user.id}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${user.id}`);
         console.log('Subscription status response:', data);
 
         if (data) {

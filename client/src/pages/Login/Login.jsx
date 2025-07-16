@@ -23,7 +23,7 @@ function Login() {
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/login', values);
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/auth/login`, values);
       login(response.data.user);
       localStorage.setItem('token', response.data.token);
       if (response.data.user.role === 'mentor') {

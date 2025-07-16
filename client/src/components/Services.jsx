@@ -21,7 +21,7 @@ function Services() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/categories/get-courses-info"
+        `${import.meta.env.VITE_API_BASE_URL}/api/categories/get-courses-info`
       );
       setData(response.data);
 
