@@ -37,8 +37,6 @@ const io = new SocketServer(httpServer, {
 });
 handleSocketEvents(io);
 
-app.use('/api/config', stripeWebhook)
-
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -49,6 +47,8 @@ app.use(cors({
   },
   credentials: true
 }));
+app.use('/api/config', stripeWebhook)
+
 
 app.use(bodyParser.json());
 
