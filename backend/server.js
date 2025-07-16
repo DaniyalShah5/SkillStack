@@ -25,7 +25,7 @@ const allowedOrigins = [
 
 
 const app = express();
-const httpServer = http.createServer(app);
+const httpServer = createServer(app);
 const PORT = process.env.PORT || 4000;
 const FRONTEND_URL = "https://lambent-dasik-e1878e.netlify.app";
 
