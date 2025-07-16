@@ -10,7 +10,7 @@ function FrontEnd (){
     const dataFrontEnd=[
         {
             id:1,
-            link:"/src/assets/logos/icons8-html.svg",
+            link:"/logos/icons8-html.svg",
             title:"HTML",
             description:"hello",
             author:"",
@@ -19,7 +19,7 @@ function FrontEnd (){
         
         {
             id:2,
-            link:"/src/assets/logos/icons8-css.svg",
+            link:"/logos/icons8-css.svg",
             title:"CSS",
             description:"",
             author:"",
@@ -27,7 +27,7 @@ function FrontEnd (){
         },
         {
             id:3,
-            link:"/src/assets/logos/Bootstrap.svg",
+            link:"/logos/Bootstrap.svg",
             title:"BOOTSTRAP",
             description:"",
             author:"",
@@ -35,7 +35,7 @@ function FrontEnd (){
         },
         {
             id:4,
-            link:"/src/assets/logos/Tailwind.svg",
+            link:"/logos/Tailwind.svg",
             title:"Tailwind CSS",
             description:"",
             author:"",
@@ -43,7 +43,7 @@ function FrontEnd (){
         },
         {
             id:5,
-            link:"/src/assets/logos/Javascript.svg",
+            link:"/logos/Javascript.svg",
             title:"JavaScript",
             description:"",
             author:"",
@@ -51,7 +51,7 @@ function FrontEnd (){
         },
         {
             id:6,
-            link:"/src/assets/logos/nodejs-icon.svg",
+            link:"/logos/nodejs-icon.svg",
             title:"Node.js",
             description:"",
             author:"",
@@ -59,7 +59,7 @@ function FrontEnd (){
         },
         {
             id:7,
-            link:"/src/assets/logos/rest-api-icon.svg",
+            link:"/logos/rest-api-icon.svg",
             title:"Api development",
             description:"",
             author:"",
@@ -67,7 +67,7 @@ function FrontEnd (){
         },
         {
             id:8,
-            link:"/src/assets/logos/mongodb-icon.svg",
+            link:"/logos/mongodb-icon.svg",
             title:"MongoDb",
             description:"",
             author:"",
@@ -75,7 +75,7 @@ function FrontEnd (){
         },
         {
             id:9,
-            link:"/src/assets/logos/sql-database.svg",
+            link:"/logos/sql-database.svg",
             title:"SQL & PostgreSQL",
             description:"",
             author:"",
@@ -83,7 +83,7 @@ function FrontEnd (){
         },
         {
             id:10,
-            link:"/src/assets/logos/python.svg",
+            link:"/logos/python.svg",
             title:"Python & Django",
             description:"",
             author:"",

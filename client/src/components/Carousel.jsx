@@ -2,24 +2,22 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React from "react";
 import Slider from "react-slick";
-import hero1 from "../assets/hero_img/hero image.webp";
-import hero2 from "../assets/hero_img/hero3.jpg";
-import hero3 from "../assets/hero_img/hero2.jpg"
+
 
 const HeroCarousel = () => {
   const slides = [
-    {
-      image: hero1,
+    { 
+      image: "/hero_img/hero1.webp",
       title: "Stop Searching, Start Learning",
       subheading: "Curated Web Dev Resources at Your Fingertips!",
     },
     {
-      image: hero2,
+      image: "/hero_img/hero2.jpg",
       title: "Learn from the Best",
       subheading: "Hand-picked tutorials from expert developers",
     },
     {
-      image: hero3,
+      image: "/hero_img/hero3.jpg",
       title: "Code, Connect, Create",
       subheading: "Your journey to web development mastery starts here",
     },

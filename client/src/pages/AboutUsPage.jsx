@@ -7,7 +7,7 @@ function AboutUsPage() {
         <div className="w-full flex py-20 pt-32 items-center justify-center border-b-[30px] border-black ">
             <p className="text-5xl font-bold mr-32 text-black leading-relaxed font-serif">The Ultimate Learning <br/> Hub for Web Developers.</p>
             <div className="relative">
-            <img src="src/assets/hero_img/pattern.png" className="h-48" />
+            <img src="/hero_img/pattern.png" className="h-48" />
             <div className="absolute text-3xl  font-bold flex inset-0 items-center justify-center" >SkillStack</div>
             </div>
         </div>
@@ -42,8 +42,8 @@ function AboutUsPage() {
         </div>
         <div className="w-full bg-gray-300 text-dark flex px-20 py-10 justify-center items-center">
             <div className="w-full ml-10">
-                
-                <img src="src/assets/hero_img/expert.avif" className="rounded-lg " />
+             
+                <img src="/hero_img/expert.avif" className="rounded-lg " />
                 
             </div>
             <div className="ml-10 pl-10 ">
