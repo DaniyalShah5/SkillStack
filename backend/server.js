@@ -16,9 +16,12 @@ import { createServer } from 'http';
 import { Server as SocketServer } from 'socket.io';
 import { handleSocketEvents } from './controllers/chatController.js';
 
-
-
 dotenv.config();
+
+const allowedOrigins = [
+  'http://localhost:5173',                      
+  'https://lambent-dasik-e1878e.netlify.app'   
+];
 
 
 const app = express();
@@ -34,13 +37,19 @@ const io = new SocketServer(httpServer, {
 });
 handleSocketEvents(io);
 
-
-
-
 app.use('/api/config', stripeWebhook)
 
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
-app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 app.use(bodyParser.json());
 
 
@@ -54,16 +63,10 @@ app.use('/api/stripe', stripeRoutes);
 app.use('/api/subscription', subscriptionRoutes);
 app.use('/api',courseDes);
 app.use('/api/chat', chatRoutes); 
-
-
-
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!' });
 });
-
-
 
 httpServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
