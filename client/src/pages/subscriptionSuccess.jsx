@@ -23,13 +23,12 @@ const SubscriptionSuccess = () => {
 
       try {
         setLoading(true);
-        console.log('Updating subscription status for user:', user.id);
         
         
         await new Promise(resolve => setTimeout(resolve, 2000));
         
         const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/subscription/status/${user.id}`);
-        console.log('Subscription status response:', data);
+       
 
         if (data) {
           await updateUser({

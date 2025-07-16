@@ -10,7 +10,6 @@ function ContactUs() {
   const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-  console.log('Service:', SERVICE_ID, 'Template:', TEMPLATE_ID, 'Key:', PUBLIC_KEY);
 
   useEffect(() => {
     if (PUBLIC_KEY) {

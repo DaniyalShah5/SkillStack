@@ -25,7 +25,7 @@ const ChatInterface = () => {
   useEffect(() => {
     if (socket) {
       socket.on('new-message', (newMessage) => {
-        console.log('Received new message:', newMessage);
+        
         setMessages(prev => [...prev, newMessage]);
         scrollToBottom();
       });

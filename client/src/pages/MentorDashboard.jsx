@@ -27,7 +27,7 @@ const MentorDashboard = () => {
   useEffect(() => {
     if (socket) {
       socket.on('new-message', (newMessage) => {
-        console.log('Received new message:', newMessage);
+        
         
         if (newMessage.sender !== user.id) {
           setMessages(prev => [...prev, newMessage]);

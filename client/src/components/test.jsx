@@ -53,7 +53,7 @@ class SocketService {
   };
 
   handleConnection(socket) {
-    console.log(`User connected: ${socket.user.name} (${socket.user.role})`);
+    
     
     if (socket.user.role === 'mentor') {
       this.handleMentorConnection(socket);
@@ -152,7 +152,7 @@ class SocketService {
   }
 
   handleDisconnect(socket) {
-    console.log(`User disconnected: ${socket.user.name}`);
+    
     
     if (socket.user.role === 'mentor') {
       this.activeMentors.delete(socket.id);

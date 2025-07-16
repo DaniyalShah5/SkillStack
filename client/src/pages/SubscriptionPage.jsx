@@ -28,7 +28,7 @@ const CheckoutForm = ({ plan, onSuccess, onError }) => {
 
     setLoading(true);
     try {
-      console.log('Submitting payment for plan:', plan);
+      
 
       const { error: submitError } = await elements.submit();
       if (submitError) {
@@ -37,12 +37,12 @@ const CheckoutForm = ({ plan, onSuccess, onError }) => {
         return;
       }
 
-      console.log('Creating payment intent...');
+      
       const { data: intentData } = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/stripe/create-payment-intent`, {
         plan,
         userId: user.id
       });
-      console.log('Payment intent created:', intentData);
+      
 
       const { error: confirmError } = await stripe.confirmPayment({
         elements,
@@ -131,7 +131,7 @@ const SubscriptionPage = () => {
   ];
 
   const handlePlanSelection = (plan) => {
-    console.log('Plan selected:', plan);
+    
     setSelectedPlan(plan);
   };
 
@@ -170,12 +170,12 @@ const SubscriptionPage = () => {
     if (selectedPlan) {
       const initializePayment = async () => {
         try {
-          console.log('Initializing payment for plan:', selectedPlan);
+         
           const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/stripe/create-payment-intent`, {
             plan: selectedPlan,
             userId:user.id
           });
-          console.log('Payment intent response:', data);
+          
           setClientSecret(data.clientSecret);
         } catch (error) {
           console.error('Payment initialization error:', error);
