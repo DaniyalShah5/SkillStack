@@ -8,9 +8,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const createPaymentIntent = async (req, res) => {
   try {
-    console.log('hello')
+    
     const { plan, userId } = req.body;
-    console.log('Creating payment intent:', { plan, userId });
+    
 
     if (!plan || !userId) {
       return res.status(400).json({ error: 'Plan and userId are required' });
@@ -33,7 +33,7 @@ export const createPaymentIntent = async (req, res) => {
       },
     });
 
-    console.log('Created payment intent:', paymentIntent.id);
+    
 
     res.json({
       clientSecret: paymentIntent.client_secret,
@@ -48,7 +48,7 @@ export const createPaymentIntent = async (req, res) => {
 
 export const subscribe = async (req, res) => {
   try {
-    console.log(userId)
+    
     const { userId, plan } = req.body;
     
     const user = await User.findById(userId);
@@ -75,7 +75,7 @@ export const subscribe = async (req, res) => {
       { new: true }
     );
 
-    console.log('Updated user:', updatedUser);
+    
 
     res.status(200).json({
       success: true,
@@ -141,22 +141,17 @@ export const getSubscriptionStatus = async (req, res) => {
 
 export const handleWebhook = async (req, res) => {
   try {
-    console.log('1. Webhook received:', new Date().toISOString());
-    console.log('2. Request headers:', req.headers);
 
     const sig = req.headers['stripe-signature'];
     let event;
 
     try {
-      console.log('req body ::' ,req.body)
       event = stripe.webhooks.constructEvent(
         req.body,
         sig,
         process.env.STRIPE_WEBHOOK_SECRET
       );
-      console.log('3. Event constructed successfully:', event.type);
     } catch (err) {
-      console.error('4. Webhook signature verification failed:', err.message);
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
@@ -164,8 +159,6 @@ export const handleWebhook = async (req, res) => {
     switch (event.type) {
       case 'payment_intent.succeeded':
         const paymentIntent = event.data.object;
-        console.log('5. Payment Intent Succeeded:', paymentIntent.id);
-        console.log('6. Payment Intent Metadata:', paymentIntent.metadata);
 
         const { plan, userId } = paymentIntent.metadata;
         
@@ -176,7 +169,6 @@ export const handleWebhook = async (req, res) => {
 
         
         const subscriptionEnd = calculateSubscriptionEnd(plan);
-        console.log('8. Calculated subscription end:', subscriptionEnd);
 
         try {
           
@@ -185,7 +177,6 @@ export const handleWebhook = async (req, res) => {
             console.error('9. User not found:', userId);
             return res.status(404).json({ error: 'User not found' });
           }
-          console.log('10. Found user:', user.email);
 
           
           const updatedUser = await User.findByIdAndUpdate(
@@ -198,14 +189,11 @@ export const handleWebhook = async (req, res) => {
             { new: true }
           );
 
-          console.log('11. Updated user:', updatedUser);
-
           if (!updatedUser) {
             console.error('12. Update failed - no user returned');
             return res.status(500).json({ error: 'Failed to update user' });
           }
 
-          console.log('13. Successfully updated user subscription');
         } catch (error) {
           console.error('14. Database operation failed:', error);
           return res.status(500).json({ error: 'Database operation failed' });
@@ -213,10 +201,7 @@ export const handleWebhook = async (req, res) => {
         break;
 
       default:
-        console.log(`15. Unhandled event type ${event.type}`);
     }
-
-    console.log('16. Sending success response');
     res.json({ received: true });
   } catch (error) {
     console.error('17. Unexpected error:', error);
@@ -277,8 +262,6 @@ export const testUpdateSubscription = async (req, res) => {
       },
       { new: true }
     );
-
-    console.log('Test update result:', updateResult);
 
     res.json(updateResult);
   } catch (error) {

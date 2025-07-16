@@ -84,7 +84,6 @@ function Nav() {
           );
           setSubscriptionStatus(data);
 
-          // If status has changed, update user context
           if (data.chatPassActive !== user.chatPassActive) {
             updateUser({
               ...user,

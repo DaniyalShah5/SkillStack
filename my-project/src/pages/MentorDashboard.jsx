@@ -85,7 +85,7 @@ const MentorDashboard = () => {
     try {
       setLoading(true);
       const response = await axios.get(`http://localhost:4000/api/chat/mentor/${user.id}`);
-      console.log('Fetched active chats:', response.data);
+      
       setActiveChats(response.data);
       setLoading(false);
     } catch (error) {
@@ -100,7 +100,7 @@ const MentorDashboard = () => {
 
     try {
       const response = await axios.get(`http://localhost:4000/api/chat/history/${currentChat._id}`);
-      console.log('Fetched chat history:', response.data);
+      
       setMessages(response.data);
     } catch (error) {
       console.error('Error fetching chat history:', error);

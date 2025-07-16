@@ -1,10 +1,25 @@
-import  { useState } from 'react';
+import  { useState, useEffect } from 'react';
 import emailjs from "emailjs-com";
 
 function ContactUs() {
+    
 
     const [formData,setFormData]=useState({name:'', email:'',message:''})
     const[status,setStatus]=useState('')
+    const SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+  console.log('Service:', SERVICE_ID, 'Template:', TEMPLATE_ID, 'Key:', PUBLIC_KEY);
+
+  useEffect(() => {
+    if (PUBLIC_KEY) {
+      emailjs.init(PUBLIC_KEY);
+    } else {
+      console.error('❌ EmailJS public key is missing');
+    }
+  }, [PUBLIC_KEY]);
+
 
     const handleChange=(e)=>{
         setFormData({
@@ -13,17 +28,20 @@ function ContactUs() {
         });
     };
 
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-
-        emailjs.sendForm('Skillstack','template_amroo9h',e.target,'mvl3kKfDV5hhh_gR5')
-        .then((result)=>{
-            setStatus('Message sent Successfully!');
-            setFormData({name:'',email:'',message:''});
-        },(error)=>{
-            setStatus('failed to sent message');
-        })
-    }
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target)
+      .then(
+        () => {
+          setStatus('Message sent Successfully!');
+          setFormData({ name: '', email: '', message: '' });
+        },
+        (error) => {
+          console.error('EmailJS error:', error);
+          setStatus('Failed to send message.');
+        }
+      );
+  };
 
   return (
     <div className="text-black flex flex-col items-center p-10">

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 
-const API_BASE_URL = "http://localhost:4000";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AdminPanel = () => {
   const [categories, setCategories] = useState([]);
@@ -43,7 +44,6 @@ const AdminPanel = () => {
       const data = await response.json();
       if (Array.isArray(data)) {
         setCategories(data);
-        console.log("Fetched categories:", data);
       } else {
         throw new Error("Unexpected data format");
       }
@@ -108,7 +108,6 @@ const AdminPanel = () => {
   };
 
   const handleDeleteTopic = async (topicId) => {
-    console.log('Deleting topic with ID:', topicId);
     try {
       const response = await fetch(`${API_BASE_URL}/api/topics/${topicId}`, {
         method: "DELETE",

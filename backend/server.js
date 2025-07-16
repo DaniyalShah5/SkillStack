@@ -34,6 +34,7 @@ handleSocketEvents(io);
 
 
 
+
 app.use('/api/config', stripeWebhook)
 
 
@@ -42,13 +43,6 @@ app.use(bodyParser.json());
 
 
 connectDB();
-console.log('Stripe configuration:', {
-  hasSecretKey: !!process.env.STRIPE_SECRET_KEY,
-  hasPublishableKey: !!process.env.STRIPE_PUBLISHABLE_KEY,
-  hasWebhookSecret: !!process.env.STRIPE_WEBHOOK_SECRET
-});
-console.log(process.env.STRIPE_SECRET_KEY);
-
 
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);

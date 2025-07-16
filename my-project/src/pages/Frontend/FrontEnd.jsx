@@ -1,4 +1,3 @@
-
 import Courses from "../Courses";
 import { useEffect,useState } from "react";
 import axios from "axios"
@@ -6,10 +5,6 @@ import { useParams } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 const title ="Front-End Development"
-
-
-
-
 
 function FrontEnd (){
     const dataFrontEnd=[

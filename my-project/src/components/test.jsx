@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 import Message from '../models/Message.js';
 
-const JWT_SECRET = 'jwt-secret';
+
+const JWT_SECRET = import.meta.env.VITE_JWT_SECRET;
 
 class SocketService {
   constructor(httpServer) {

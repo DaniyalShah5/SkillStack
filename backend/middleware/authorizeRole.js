@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const JWT_SECRET = 'jwt-secret';
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export const authorizeRole = (roles) => {
   return (req, res, next) => {

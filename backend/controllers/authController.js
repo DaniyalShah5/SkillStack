@@ -1,9 +1,12 @@
 import bcrypt from 'bcrypt';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
-const JWT_SECRET = 'jwt-secret';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export const signup = async (req, res) => {
   try {

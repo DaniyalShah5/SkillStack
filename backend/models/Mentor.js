@@ -1,4 +1,3 @@
-// models/Mentor.js
 import mongoose from 'mongoose';
 
 const mentorSchema = new mongoose.Schema({

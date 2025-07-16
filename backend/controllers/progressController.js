@@ -1,6 +1,5 @@
 import UserProgress from '../models/UserProgress.js';
 
-
 export const updateProgress = async (req, res) => {
   try {
     const { userId, topicId, completed } = req.body;

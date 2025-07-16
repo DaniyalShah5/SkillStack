@@ -2,9 +2,7 @@ import Nav from "./components/Navbar";
 import { HomePage } from "./pages/Home";
 import Footer from "./components/Footer";
 import FrontEnd from "./pages/Frontend/FrontEnd";
-
 import AboutSection from "./components/AboutSection";
-
 import { CoursePage } from "./pages/Frontend/tutorial/CoursePage";
 import AboutUsPage from "./pages/AboutUsPage";
 import ContactUs from "./pages/ContactUs";
@@ -25,6 +23,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
 
 function Layout({ children }) {
   return (

@@ -1,4 +1,3 @@
-// ChatPass.jsx
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +16,6 @@ const ChatPass = () => {
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
 
-  // Socket Connection Setup
   useEffect(() => {
     if (!user?.chatPassActive) {
       navigate('/subscription');
@@ -32,7 +30,7 @@ const ChatPass = () => {
 
     socket.on('connect', () => {
       setIsConnected(true);
-      // Request previous messages after connection
+     
       socket.emit('get_previous_messages');
       setIsLoading(false);
     });
@@ -57,7 +55,6 @@ const ChatPass = () => {
     return () => socket.disconnect();
   }, [user, navigate]);
 
-  // Auto-scroll to bottom
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -65,7 +62,6 @@ const ChatPass = () => {
       scrollToBottom()
     }, [messages]);
 
-  // Message sending handler
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!message.trim() || !socketRef.current) return;
@@ -80,14 +76,12 @@ const ChatPass = () => {
     setMessage('');
   };
 
-  // Typing indicator handler
   const handleTyping = useCallback(() => {
     if (socketRef.current) {
       socketRef.current.emit('user_typing');
     }
   }, []);
 
-  // Time formatter
   const formatTime = useCallback((timestamp) => {
     return new Date(timestamp).toLocaleTimeString([], {
       hour: '2-digit',

@@ -2,7 +2,6 @@ import Category from '../models/Category.js';
 import Course from '../models/Course.js';
 import Topic from '../models/Topic.js';
 
-// Create or update a category, course, or topic
 export const createOrUpdate = async (req, res) => {
   const { categoryName, courseName, topic } = req.body;
 

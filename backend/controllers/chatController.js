@@ -1,24 +1,21 @@
-// controllers/chatController.js
+
 import Chat from '../models/Chat.js';
 import User from '../models/User.js';
 
 export const initializeChat = async (req, res) => {
   try {
     const { userId } = req.body;
-    
-    // Verify user has active ChatPass
+   
     const user = await User.findById(userId);
     if (!user?.chatPassActive) {
       return res.status(403).json({ error: 'ChatPass required' });
     }
 
-    // Find a user with mentor role
     const mentor = await User.findOne({ role: 'mentor' });
     if (!mentor) {
       return res.status(500).json({ error: 'No mentors available in the system' });
     }
 
-    // Check if there's an existing chat between this user and mentor
     const existingChat = await Chat.findOne({
       userId: userId,
       mentorId: mentor._id
@@ -28,7 +25,6 @@ export const initializeChat = async (req, res) => {
       return res.status(200).json(existingChat);
     }
 
-    // Create new chat
     const chat = new Chat({
       userId,
       mentorId: mentor._id,
@@ -58,7 +54,6 @@ export const getUserChats = async (req, res) => {
 export const getMentorChats = async (req, res) => {
   try {
     const { mentorId } = req.params;
-    // First verify the user is actually a mentor
     const mentor = await User.findOne({ _id: mentorId, role: 'mentor' });
     if (!mentor) {
       return res.status(403).json({ error: 'Unauthorized. Mentor access only.' });
@@ -90,14 +85,13 @@ export const getChatHistory = async (req, res) => {
   }
 };
 
-// Socket.IO event handlers
 export const handleSocketEvents = (io) => {
   io.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
+    
 
     socket.on('join-chat', (chatId) => {
       socket.join(chatId);
-      console.log(`User joined chat: ${chatId}`);
+      
     });
 
     socket.on('send-message', async ({ chatId, senderId, content }) => {
@@ -114,8 +108,6 @@ export const handleSocketEvents = (io) => {
         chat.messages.push(message);
         chat.lastMessage = new Date();
         await chat.save();
-    
-        // Emit with complete message object
         io.to(chatId).emit('new-message', {
           ...message,
           chatId,

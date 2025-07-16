@@ -1,11 +1,6 @@
 import { Link } from "react-router-dom";
 
-
-
 function Information (){
-    
-    
-
 
     const infoAbout =[
         {
