@@ -37,11 +37,12 @@ const io = new SocketServer(httpServer, {
 });
 handleSocketEvents(io);
 
+app.use('/api/config/stripe/webhook', express.raw({ type: 'application/json' }), stripeWebhook);
+
 app.use(cors({
   origin: allowedOrigins,
   credentials: true
 }));
-app.use('/api/config', stripeWebhook)
 
 
 app.use(bodyParser.json());
