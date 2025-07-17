@@ -96,7 +96,11 @@ const ChatInterface = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!message.trim() || !currentChat) return;
+    if (!user || !user.id || !message.trim() || !currentChat) {
+      console.warn('Message not sent: User not fully loaded, message empty, or chat not initialized.');
+      
+      return; 
+    }
 
     const messageContent = message;
     setMessage(''); 
