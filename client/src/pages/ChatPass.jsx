@@ -155,7 +155,7 @@ const ChatInterface = () => {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex ${msg.sender === user.id ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${msg.sender._id === user.id ? 'justify-end' : 'justify-start'}`}
               >
                 <div
                   className={`max-w-[70%] rounded-lg p-3 ${
