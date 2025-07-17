@@ -24,6 +24,7 @@ const ChatInterface = () => {
   
   useEffect(() => {
   if (socket) {
+    socket.off('new-message');
     socket.on('new-message', (newMessage) => {
       console.log('Raw new message from socket:', newMessage); 
 
@@ -33,14 +34,11 @@ const ChatInterface = () => {
         processedMessage.sender = { _id: processedMessage.sender };
       }
 
-      console.log('User ID from context:', user.id);
-      console.log('Type of user ID:', typeof user.id);
-
       setMessages(prev => [...prev, processedMessage]);
       scrollToBottom();
     });
   }
-}, [socket]);
+}, [socket, user]);
 
   
   useEffect(() => {
@@ -98,7 +96,6 @@ const ChatInterface = () => {
     e.preventDefault();
     if (!user || !user.id || !message.trim() || !currentChat) {
       console.warn('Message not sent: User not fully loaded, message empty, or chat not initialized.');
-      
       return; 
     }
 
