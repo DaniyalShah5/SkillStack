@@ -159,7 +159,7 @@ const ChatInterface = () => {
               >
                 <div
                   className={`max-w-[70%] rounded-lg p-3 ${
-                    msg.sender === user.id
+                    msg.sender._id === user.id
                       ? 'bg-violet-600 text-white'
                       : 'bg-gray-100 text-gray-900'
                   }`}
