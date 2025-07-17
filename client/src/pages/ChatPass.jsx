@@ -33,6 +33,9 @@ const ChatInterface = () => {
         processedMessage.sender = { _id: processedMessage.sender };
       }
 
+      console.log('User ID from context:', user.id);
+      console.log('Type of user ID:', typeof user.id);
+
       setMessages(prev => [...prev, processedMessage]);
       scrollToBottom();
     });
