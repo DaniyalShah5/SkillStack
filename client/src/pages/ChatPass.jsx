@@ -26,7 +26,6 @@ const ChatInterface = () => {
   if (socket) {
     socket.off('new-message');
     socket.on('new-message', (newMessage) => {
-      console.log('Raw new message from socket:', newMessage); 
 
       let processedMessage = { ...newMessage };
 
@@ -35,7 +34,7 @@ const ChatInterface = () => {
       }
 
       setMessages(prev => [...prev, processedMessage]);
-      scrollToBottom();
+      
     });
   }
 }, [socket, user]);
@@ -54,6 +53,10 @@ const ChatInterface = () => {
       fetchChatHistory();
     }
   }, [currentChat, socket]);
+
+  useEffect(() => {
+   scrollToBottom();
+   }, [messages]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -86,7 +89,7 @@ const ChatInterface = () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/chat/history/${currentChat._id}`);
       setMessages(response.data);
-      scrollToBottom();
+      
     } catch (error) {
       setError('Failed to load chat history');
     }
