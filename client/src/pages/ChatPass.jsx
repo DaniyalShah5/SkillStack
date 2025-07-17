@@ -59,7 +59,9 @@ const ChatInterface = () => {
    }, [messages]);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  setTimeout(() => {
+  messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, 0); 
   };
 
   const initializeOrFetchChat = async () => {
@@ -151,8 +153,8 @@ const ChatInterface = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto h-screen p-4 bg-gray-50">
-      <div className="flex flex-col h-full bg-white rounded-lg shadow-lg">
+    <div className="max-w-4xl mx-auto h-screen flex flex-col bg-gray-50">
+      <div className="flex flex-col flex-1 bg-white rounded-lg shadow-lg m-4">
         {/* Chat Header */}
         <div className="p-4 border-b">
           <h3 className="text-lg font-semibold text-gray-900">
