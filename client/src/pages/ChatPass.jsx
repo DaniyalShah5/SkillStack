@@ -23,14 +23,21 @@ const ChatInterface = () => {
 
   
   useEffect(() => {
-    if (socket) {
-      socket.on('new-message', (newMessage) => {
-        
-        setMessages(prev => [...prev, newMessage]);
-        scrollToBottom();
-      });
-    }
-  }, [socket]);
+  if (socket) {
+    socket.on('new-message', (newMessage) => {
+      console.log('Raw new message from socket:', newMessage); 
+
+      let processedMessage = { ...newMessage };
+
+      if (typeof processedMessage.sender === 'string') {
+        processedMessage.sender = { _id: processedMessage.sender };
+      }
+
+      setMessages(prev => [...prev, processedMessage]);
+      scrollToBottom();
+    });
+  }
+}, [socket]);
 
   
   useEffect(() => {
